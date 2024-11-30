@@ -13,6 +13,8 @@ import * as hootService from './services/hootService';
 import HootDetails from './components/HootDetails/HootDetails';
 import HootForm from './components/HootForm/HootForm';
 
+export const AuthedUserContext = createContext(null);
+
 const App = () => {
   const [user, setUser] = useState(authService.getUser());                         // Using `authService.getUser()` from the authService. 
   const [hoots, setHoots] = useState([]);
@@ -40,9 +42,17 @@ const handleSignout = () => {
   setUser(null)
 }
 
+const handleDeleteHoot = async (hootId) => {
+  console.log('hootId to be deleted:', hootId)
+  const deletedHoot = await hootService.deleteHoot(hootId);
+  setHoots(hoots.filter((hoot) => hoot._id !== deletedHoot._id));
+  navigate('/hoots');
+}
+
   //---------------------------------------------------------------------\\
   return (
     <>
+      <AuthedUserContext.Provider value={user}>
       <NavBar user={user} handleSignout={handleSignout} />                        
       <Routes>
 
@@ -51,7 +61,7 @@ const handleSignout = () => {
           {/* PROTECTED ROUTES */}
           <Route path="/" element={<Dashboard user={user} />} />
           <Route path="/hoots" element={<HootList hoots={hoots} />} />
-          <Route path="/hoots/:hootId" element={<HootDetails /> }/>
+          <Route path="/hoots/:hootId" element={<HootDetails handleDeleteHoot={handleDeleteHoot} /> }/>
           <Route path="/hoots/new" element={<HootForm handleAddHoot={handleAddHoot} />} />      
           </>
         ) : ( 
@@ -63,6 +73,7 @@ const handleSignout = () => {
        <Route path="/signup" element={<SignupForm setUser={setUser} />} />  
        <Route path="/signin" element={<SigninForm setUser={setUser} /> } />
       </Routes>
+      </AuthedUserContext.Provider>
     </>
   )
 }
