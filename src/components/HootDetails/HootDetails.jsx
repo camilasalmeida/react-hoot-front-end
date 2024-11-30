@@ -4,7 +4,6 @@ import { useState, useEffect } from "react";
 import * as hootService from '../../services/hootService';
 
 
-
 const HootDetails = (props) => {
         const {hootId} = useParams()                     // Make sure to destructure the hootId when calling upon useParams().
         console.log('hootId is:', hootId)
@@ -23,7 +22,6 @@ const HootDetails = (props) => {
 
 
 if (!hoot) return <main>Loading...</main>
-
     return (
         <main>
            <header>
@@ -36,7 +34,6 @@ if (!hoot) return <main>Loading...</main>
            </header>
            <p>{hoot.text}</p>
            <section>
-
 
             <h2>Comments</h2>
         {!hoot.comments.length && <p>There are no comments.</p>}
@@ -55,7 +52,6 @@ if (!hoot) return <main>Loading...</main>
         </main>
     )
 };
-
 
 
 export default HootDetails;
