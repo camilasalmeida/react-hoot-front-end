@@ -2,7 +2,7 @@
 import { useParams, Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import * as hootService from '../../services/hootService';
-
+import CommentForm from '../CommentForm/CommentForm';
 
 const HootDetails = (props) => {
         const {hootId} = useParams()                     // Make sure to destructure the hootId when calling upon useParams().
@@ -17,8 +17,13 @@ const HootDetails = (props) => {
         }
         fetchHoot()
     }, [hootId]);
-
     console.log('hoot state:', hoot);
+
+    const handleAddComment = async (commentFormData) => {
+        const newComment = await hootService.createComment(hootId, commentFormData);
+        setHoot({ ...hoot, comments: [...hoot.comments, newComment] });
+        //console.log('commentFormData', commentFormData);
+    };
 
 
 if (!hoot) return <main>Loading...</main>
@@ -36,6 +41,10 @@ if (!hoot) return <main>Loading...</main>
            <section>
 
             <h2>Comments</h2>
+            <CommentForm handleAddComment={handleAddComment} />
+
+
+
         {!hoot.comments.length && <p>There are no comments.</p>}
         {hoot.comments.map((comment) => (
             <article key={comment._id}>

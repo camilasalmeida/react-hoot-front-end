@@ -13,7 +13,6 @@ import * as hootService from './services/hootService';
 import HootDetails from './components/HootDetails/HootDetails';
 import HootForm from './components/HootForm/HootForm';
 
-
 const App = () => {
   const [user, setUser] = useState(authService.getUser());                         // Using `authService.getUser()` from the authService. 
   const [hoots, setHoots] = useState([]);
