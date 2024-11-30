@@ -10,7 +10,7 @@ import SigninForm from './components/SigninForm/SigninForm';
 import * as authService from '../src/services/authService';                         // Import the authservice component to SET the default value of our user in state. 
 import HootList from './components/HootList/HootList';
 import * as hootService from './services/hootService';
-
+import HootDetails from './components/HootDetails/HootDetails';
 
 
 const App = () => {
@@ -53,6 +53,7 @@ const handleSignout = () => {
           {/* PROTECTED ROUTES */}
           <Route path="/" element={<Dashboard user={user} />} />
           <Route path="/hoots" element={<HootList hoots={hoots} />} />
+          <Route path="/hoots/:hootId" element={<HootDetails /> }/>
 
 
           </>

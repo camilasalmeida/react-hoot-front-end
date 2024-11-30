@@ -1,11 +1,10 @@
 // src/components/HootList/HootList.jsx
+
 import { Link } from 'react-router-dom';
 
 
 const HootList = (props) => {
     //console.log('props is being passed:', props.hoots)
-
-
 
 
     return (
@@ -17,11 +16,10 @@ const HootList = (props) => {
                         <h2>{hoot.title}</h2>
                         <p>
                             {hoot.author.username} posted on
-                            {new Date(hoot.createdAt).toLocaleDateString()} at 
-                            {new Date(hoot.createdAt).toLocaleTimeString()}
+                            {new Date(hoot.createdAt).toLocaleDateString()} 
                         </p>
-
                     </header>
+                    <p>{hoot.text}</p>
                 </article>
             </Link>
         ))}

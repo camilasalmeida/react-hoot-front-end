@@ -13,5 +13,15 @@ const index = async () => {
     }
 }
 
+const show = async (hootId) => {                                                      // Dont't forget to pass the `hootId` as an argument.
+    try {
+        const res = await fetch(`${BASE_URL}/${hootId}`, {
+            headers: { Authorization: `Bearer ${localStorage.getItem('token')}`},          // Don't forget the Authorization header.
+        });
+        return res.json();
+    } catch (error) {
+        console.log(error);
+    }
+}
 
-export { index };
+export { index, show, };
