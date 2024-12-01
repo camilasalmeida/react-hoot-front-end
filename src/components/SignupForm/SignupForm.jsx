@@ -27,7 +27,7 @@ const SignupForm = (props) => {
    //console.log(formData);                                               // This line will print the form data to the console.
     try {
         const newUserResponse = await authService.signup(formData)
-        props.setUser(newUserResponse.user)                              // this will modify the state in the App component.
+        props.setUser(newUserResponse)                              // this will modify the state in the App component.
         navigate('/')                                                   // upon redirect you will see the "Dashboard" page.
     //console.log('The new user is:' , newUserResponse)
     } catch (err) {
