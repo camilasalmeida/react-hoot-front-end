@@ -74,6 +74,7 @@ const handleUpdateHoot = async (hootId, hootFormData) => {
           <Route path="/hoots/:hootId" element={<HootDetails handleDeleteHoot={handleDeleteHoot} /> }/>
           <Route path="/hoots/new" element={<HootForm handleAddHoot={handleAddHoot} />} />  
           <Route path="/hoots/:hootId/edit" element={<HootForm handleUpdateHoot={handleUpdateHoot} />} />
+          <Route path="/hoots/:hootId/comments/:commentId/edit" element={<CommentForm /> } />
           </>
         ) : ( 
           // PUBLIC ROUTE:
