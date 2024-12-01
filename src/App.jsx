@@ -49,6 +49,14 @@ const handleDeleteHoot = async (hootId) => {
   navigate('/hoots');
 }
 
+const handleUpdateHoot = async (hootId, hootFormData) => {
+  const updateHoot = await hootService.update(hootId, hootFormData);
+  setHoots(hoots.map((hoot) => (hootId === hoot._id ? updateHoot : hoot)));
+  console.log('hootId is:', hootId, 'hootFormData is:', hootFormData);
+  navigate(`/hoots/${hootId}`);
+};
+
+
   //---------------------------------------------------------------------\\
   return (
     <>
@@ -62,7 +70,8 @@ const handleDeleteHoot = async (hootId) => {
           <Route path="/" element={<Dashboard user={user} />} />
           <Route path="/hoots" element={<HootList hoots={hoots} />} />
           <Route path="/hoots/:hootId" element={<HootDetails handleDeleteHoot={handleDeleteHoot} /> }/>
-          <Route path="/hoots/new" element={<HootForm handleAddHoot={handleAddHoot} />} />      
+          <Route path="/hoots/new" element={<HootForm handleAddHoot={handleAddHoot} />} />  
+          <Route path="/hoots/:hootId/edit" element={<HootForm handleUpdateHoot={handleUpdateHoot} />} />
           </>
         ) : ( 
           // PUBLIC ROUTE:
