@@ -1,10 +1,15 @@
+// src/components/NavBar/NavBar.jsx
+
+import styles from './NavBar.module.css';
 import { Link } from 'react-router-dom';
+import Logo from '../../assets/images/logo.svg';
 
 const NavBar = ({ user, handleSignout }) => {
   return (
     <>
       { user ? (
-        <nav>
+        <nav className={styles.container}>
+          <Link to='/'><img src={Logo} alt="A cute Owl" /></Link>
           <ul>
             <li><Link to="/">HOME</Link></li>
             <li><Link to="/hoots">HOOTS</Link></li>
