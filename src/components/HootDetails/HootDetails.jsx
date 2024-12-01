@@ -29,6 +29,15 @@ const HootDetails = (props) => {
     //console.log('commentFormData', commentFormData);
   };
 
+const handleDeleteComment = async (commentId) => {
+    console.log('commentId is:', commentId);
+    const deletedComment = await hootService.deleteComment(hootId, commentId);
+    setHoot({ ...hoot, comments: hoot.comments.filter((comment) => comment._id !== commentId)},
+    navigate('/hoots'))
+};
+
+  //------------------------------------\\
+
   if (!hoot) return <main>Loading...</main>
   return (
     <main>
@@ -63,8 +72,12 @@ const HootDetails = (props) => {
                 {comment.author.username} posted on
                 {new Date(comment.createdAt).toLocaleDateString()}
               </p>
+              <>
+              <Link to={`/hoots/${hootId}/comments/:commentId/edit`}>Edit</Link>
+              <button onClick={() => props.handleDeleteComment(commentId)}>Delete</button>
+              
+              </>
             </header>
-
             <p>{comment.text}</p>
           </article>
             )
