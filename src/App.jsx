@@ -12,6 +12,8 @@ import HootList from './components/HootList/HootList';
 import * as hootService from './services/hootService';
 import HootDetails from './components/HootDetails/HootDetails';
 import HootForm from './components/HootForm/HootForm';
+import CommentForm from './components/CommentForm/CommentForm';
+
 
 export const AuthedUserContext = createContext(null);
 
